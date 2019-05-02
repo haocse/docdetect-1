@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='docdetect1',
-    version='1.0.0',
+    version='1.0.1',
     author='haotran',
     author_email='hao.cse@gmail.com',
     url='https://github.com/haocse/docdetect-1',

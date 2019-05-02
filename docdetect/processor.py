@@ -9,21 +9,36 @@ def process(im, edge_detection):
     
     rgb_im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
     edges = edge_detection.detectEdges(np.float32(rgb_im) / 255.0)
+
+    # bold diate => rectangle. 
     orimap = edge_detection.computeOrientation(edges)
     edges = edge_detection.edgesNms(edges, orimap)
     # edges1 = np.uint8(edges)*255
     minV = 0
-    maxV = np.max(edges)
-    thresh_val = 0.48
-
+    maxV = np.max(edges) # how to deal with maxV => ... i don't know this number... 
+    # print (maxV)
+    thresh_val = 0.9
+    # avg = thresh_val
 	# apply average thresholding , if the max thresh in the image is > thresh_val
     if maxV > thresh_val:
-        avg = ( maxV - minV ) / 2
+        avg = ( maxV - minV ) / 2 # * 3 ???? 
     else:
         avg = thresh_val
-        
+
+    # avg = ( maxV - minV ) / 4
+    
+    print (len(edges))
+    print (edges)
+    print ("------")
+    print (edges[edges > avg] )
+    print ("------")
+    print (edges[edges < avg])
+    print ("------")
     edges[edges > avg] = 255
+    print (edges[edges > avg])
+    print ("------")
     edges[edges <= avg] = 0
+    print (edges[edges <= avg])
     # edges.convertTo(cv2.COLOR_BGR2RGB)
     # np.clip(edges, 0, 255, out=edges)
     # edges1 = edges.astype('uint8')
