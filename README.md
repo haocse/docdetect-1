@@ -19,11 +19,11 @@ Simple real-time detection of documents in images using Canny Edge Detection, Ho
 To install, use `pip` or `easy_install`:
 
 ```bash
-$ pip install --upgrade docdetect
+$ pip install --upgrade docdetect1
 ```
 or
 ```bash
-$ easy_install --upgrade docdetect
+$ easy_install --upgrade docdetect1
 ```
 
 # Instructions
@@ -44,7 +44,7 @@ Process a ```video```:
 
 ```python
 import cv2
-import docdetect
+import docdetect1
 
 video = cv2.VideoCapture(video_path)
 cv2.startWindowThread()
@@ -52,8 +52,8 @@ cv2.namedWindow('output')
 while video.isOpened():
     ret, frame = video.read()
     if ret:
-        rects = docdetect.process(frame)
-        frame = docdetect.draw(rects, frame)
+        rects = docdetect1.process(frame)
+        frame = docdetect1.draw(rects, frame)
         cv2.imshow('output', frame)
         cv2.waitKey(1)
 video.release()

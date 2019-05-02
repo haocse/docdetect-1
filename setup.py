@@ -4,11 +4,11 @@ with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='docdetect',
+    name='docdetect1',
     version='2019.01.2',
-    author='alez',
-    author_email='alez.pypi@gmail.com',
-    url='https://github.com/alessandrozamberletti/docdetect',
+    author='haotran',
+    author_email='hao.cse@gmail.com',
+    url='https://github.com/haocse/docdetect-1',
     description='Real-time detection of documents in images.',
     long_description=long_description,
     long_description_content_type='text/markdown',
