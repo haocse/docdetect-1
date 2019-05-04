@@ -6,7 +6,10 @@ import sys
 import docdetect
 import numpy as np
 import urllib.request
-
+from time import sleep
+import threading
+import time
+current_milli_time = lambda: int(round(time.time() * 1000))
 url='http://172.16.50.57:8080/shot.jpg'
 
 video_path = os.path.join(im_folder, 'black.mp4')
@@ -18,13 +21,33 @@ cv2.moveWindow('output', 500, 30)
 model = sys.argv[2]
 # print (model)
 edge_detection = cv2.ximgproc.createStructuredEdgeDetection(model)
-
+rects = None
+milis = current_milli_time()
 while True:
     imgResp=urllib.request.urlopen(url)
     imgNp=np.array(bytearray(imgResp.read()),dtype=np.uint8)
     frame=cv2.imdecode(imgNp,-1)
-    rects = docdetect.process(frame, edge_detection)
-    frame = docdetect.draw(rects, frame)
+
+    if current_milli_time() - milis > 500:
+        print ("hey...")
+        milis = current_milli_time()
+        rects = docdetect.process(frame, edge_detection)
+
+    if rects:    
+        frame = docdetect.draw(rects, frame)
     cv2.imshow('output', frame)
     cv2.waitKey(1)
 video.release()
+
+# def printit():
+#     threading.Timer(0.5, printit).start()
+#     imgResp=urllib.request.urlopen(url)
+#     imgNp=np.array(bytearray(imgResp.read()),dtype=np.uint8)
+#     frame=cv2.imdecode(imgNp,-1)
+#     rects = docdetect.process(frame, edge_detection)
+#     frame = docdetect.draw(rects, frame)
+#     cv2.imshow('output', frame)
+#     cv2.waitKey(1)
+# #   print ("Hello, World!")
+# printit()
+# video.release()

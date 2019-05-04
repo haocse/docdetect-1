@@ -17,15 +17,15 @@ def process(im, edge_detection):
     minV = 0
     maxV = np.max(edges) # how to deal with maxV => ... i don't know this number... 
     # print (maxV)
-    thresh_val = 0.9
+    thresh_val = 0.85
     # avg = thresh_val
 	# apply average thresholding , if the max thresh in the image is > thresh_val
-    if maxV > thresh_val:
-        avg = ( maxV - minV ) / 2 # * 3 ???? 
-    else:
-        avg = thresh_val
+    # if maxV > thresh_val:
+    #     avg = ( maxV - minV ) / 2 # * 3 ???? 
+    # else:
+    #     avg = thresh_val
 
-    # avg = ( maxV - minV ) / 4
+    avg = ( maxV - minV ) / 2
     
     print (len(edges))
     print (edges)
