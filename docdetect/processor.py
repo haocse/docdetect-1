@@ -81,7 +81,7 @@ def process(im, edge_detection):
                 if x2-x1 != 0:
                     k = x2-x1
                     print (str(ii))
-                    cv2.putText(im2, str(ii), (x1+5,y1+5), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255,255,255), lineType=cv2.LINE_AA)
+                    
                     pass
                 else:
                     k = 99999
@@ -143,6 +143,7 @@ def process(im, edge_detection):
                 x22 = int(x0 - 1000*(-b))
                 y22 = int(y0 - 1000*(a))
 
+                cv2.putText(im2, str(ii), (int((x12+x22)/2+30),int((y12+y22)/2)+50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255,255,255), lineType=cv2.LINE_AA)
                 cv2.line(im2, (x12,y12), (x22,y22), (255,255,255), 2)
                 # try:
 
@@ -187,7 +188,7 @@ def process(im, edge_detection):
 
     cv2.imshow("im2", im2)
 
-    cv2.imshow("---", im)
+    # cv2.imshow("---", im)
     cv2.waitKey(1)
     return docdetect.find_quadrilaterals(_intersections)
 
