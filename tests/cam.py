@@ -29,13 +29,19 @@ while True:
     frame=cv2.imdecode(imgNp,-1)
 
     if current_milli_time() - milis > 500:
-        print ("hey...")
+        # print ("hey...")
         milis = current_milli_time()
         rects = docdetect.process(frame, edge_detection)
 
+    
     if rects:    
-        frame = docdetect.draw(rects, frame)
-    cv2.imshow('output', frame)
+        frame1 = docdetect.draw(rects, frame)
+    
+        cv2.imshow('output', frame1)
+
+    
+    # cv2.imshow('output2', frame2)
+
     cv2.waitKey(1)
 video.release()
 

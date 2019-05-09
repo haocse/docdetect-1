@@ -6,7 +6,7 @@ import sys
 import docdetect
 
 
-video_path = os.path.join(im_folder, 'black.mp4')
+video_path = os.path.join(im_folder, 'simple.mp4')
 video = cv2.VideoCapture(video_path)
 cv2.startWindowThread()
 cv2.namedWindow('output')

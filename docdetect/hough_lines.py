@@ -13,6 +13,15 @@ def detect_lines(im, hough_thr=65, group_similar_thr=30):
         lines = _group_similar(lines, group_similar_thr)
     return lines
 
+def detect_lines2(im, hough_thr=65, group_similar_thr=30):
+    lines = cv2.HoughLines(image=im, rho=1, theta=np.pi / 90, threshold=hough_thr)
+    if lines is None:
+        return []
+    lines = _cvhoughlines2list(lines)
+    if group_similar_thr != 0:
+        lines = _group_similar(lines, group_similar_thr)
+    return lines
+
 
 def _group_similar(lines, thr):
     lines = sorted(lines, key=lambda line: line[0])
