@@ -20,7 +20,7 @@ model = sys.argv[2]
 edge_detection = cv2.ximgproc.createStructuredEdgeDetection(model)
 
 while video.isOpened():
-    time.sleep(0.5)
+    # time.sleep(0.5)
     ret, frame = video.read()
     if ret:
         rects = docdetect.process(frame, edge_detection)
