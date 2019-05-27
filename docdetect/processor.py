@@ -18,7 +18,7 @@ def process(im, edge_detection):
     minV = 0
     maxV = np.max(edges) # how to deal with maxV => ... i don't know this number... 
     # print (maxV)
-    thresh_val = 0.4 # edges usually has a intensity greater than 0.84 ????
+    thresh_val = 0.3 # edges usually has a intensity greater than 0.84 ????
     avg = thresh_val
 	# apply average thresholding , if the max thresh in the image is > thresh_val
     # if maxV > thresh_val:
@@ -55,17 +55,18 @@ def process(im, edge_detection):
     # cv2.imwrite("resizeimg.jpg",newimg)
     # edges = docdetect.detect_edges(im, blur_radius=7)
     
-    lines_unique = docdetect.detect_lines(edges1, 30)
+    # lines_unique = docdetect.detect_lines(edges1, 30)
 
     num_pix_threshold = 80
     im2 = np.copy(im)
-    linesP = cv2.HoughLinesP(edges1, 1, np.pi/180, 65, 45, 10, 10)
+    linesP = cv2.HoughLinesP(edges1, 1, np.pi/180, 65, 45, 40, 10)
     lines_uniqueP = []
     if linesP is not None:
         ii = 0
         for line in linesP:
             for x1,y1,x2,y2 in line:
-                cv2.line(im2, (x1,y1), (x2,y2), (255,0,255), 2)
+                # cv2.line(im2, (x1,y1), (x2,y2), (255,0,255), 2)
+                
                 # cv2.putText(im2, str(ii), (x1,y1), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255,0,255), lineType=cv2.LINE_AA)
                 # print ("-----")
                 # print (str(ii))
@@ -138,15 +139,19 @@ def process(im, edge_detection):
                 
                 # if rho is NaN:
                 #     pass
-                a = np.cos(theta)
-                b = np.sin(theta)
-                x0 = a * rho 
-                y0 = b * rho
 
-                x12 = int(x0 + 1000*(-b))
-                y12 = int(y0 + 1000*(a))
-                x22 = int(x0 - 1000*(-b))
-                y22 = int(y0 - 1000*(a))
+                #========== good part
+                # a = np.cos(theta)
+                # b = np.sin(theta)
+                # x0 = a * rho 
+                # y0 = b * rho
+
+                # x12 = int(x0 + 1000*(-b))
+                # y12 = int(y0 + 1000*(a))
+                # x22 = int(x0 - 1000*(-b))
+                # y22 = int(y0 - 1000*(a))
+
+                #========== good part
 
                 # if theta > 0:
                 # print (theta)
@@ -171,22 +176,24 @@ def process(im, edge_detection):
 
     # print ("-lines_unique-")
     # print (lines_unique)
-    for line in lines_uniqueP:
-        # print (line)
-    # for line in lines_unique:
-        rho = line[0]
-        theta =line[1]
-        # print (rho)
-        # print (theta)
-        a = np.cos(theta)
-        b = np.sin(theta)
-        x0 = a * rho 
-        y0 = b * rho 
-        x1 = int(x0 + 1000*(-b))
-        y1 = int(y0 + 1000*(a))
-        x2 = int(x0 - 1000*(-b))
-        y2 = int(y0 - 1000*(a))
-        cv2.line(im,  (x1,y1), (x2,y2), (0,0,255), 2)
+
+
+    # for line in lines_uniqueP:
+    #     # print (line)
+    # # for line in lines_unique:
+    #     rho = line[0]
+    #     theta =line[1]
+    #     # print (rho)
+    #     # print (theta)
+    #     a = np.cos(theta)
+    #     b = np.sin(theta)
+    #     x0 = a * rho 
+    #     y0 = b * rho 
+    #     x1 = int(x0 + 1000*(-b))
+    #     y1 = int(y0 + 1000*(a))
+    #     x2 = int(x0 - 1000*(-b))
+    #     y2 = int(y0 - 1000*(a))
+    #     # cv2.line(im,  (x1,y1), (x2,y2), (0,0,255), 2)
         
     _intersections = docdetect.find_intersections(lines_uniqueP, im)
     # print (_intersections)
@@ -199,7 +206,7 @@ def process(im, edge_detection):
     #     # cv2.line(im, )
     #     pass
 
-    cv2.imshow("im2", im2)
+    # cv2.imshow("im2", im2)
 
     # cv2.imshow("---", im)
     cv2.waitKey(1)

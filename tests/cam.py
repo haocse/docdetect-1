@@ -10,8 +10,9 @@ from time import sleep
 import threading
 import time
 current_milli_time = lambda: int(round(time.time() * 1000))
-# url='http://172.16.50.57:8080/shot.jpg'
-url='http://192.168.43.109:8080/shot.jpg'
+# url='http://172.16.50.47:8080/shot.jpg'
+url='http://172.16.50.57:8080/shot.jpg'
+# url='http://192.168.43.109:8080/shot.jpg'
 
 video_path = os.path.join(im_folder, 'black.mp4')
 video = cv2.VideoCapture(video_path)

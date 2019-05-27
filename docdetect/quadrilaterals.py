@@ -19,15 +19,33 @@ def _node2coords(node, intersections):
 
 
 def _build_graph(intersections):
+    # print (intersections)
     graph = {k["id"]: [] for k in intersections}
+    print ("----")
     for i1, i2 in itertools.permutations(intersections, 2):
+        
         if _common_line_exists(i1["lines"], i2["lines"]):
             graph[i1["id"]].append(i2["id"])
+    
+    print (graph)
     return graph
 
 
 def _common_line_exists(l1, l2):
+    print (l1)
+    print (l2)
+    print ("***")
+    print (list(l1))
+    print (list(l2))
+    
     common_line = set(list(l1)) & set(list(l2))
+    print ("___")
+    print (set(list(l1)))
+    print (set(list(l2)))
+
+    print ("=====")
+    # print (common_line)
+    print (common_line if common_line else "false")
     return True if common_line else False
 
 
